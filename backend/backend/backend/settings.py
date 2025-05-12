@@ -135,7 +135,7 @@ AUTH_USER_MODEL = 'account.User'
 #simpleui 菜单
 SIMPLEUI_CONFIG = {
     # 'system_keep': True,
-    'menu_display': ['Simpleui', '数据中心', '权限认证', '动态菜单测试'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
+    'menu_display': ['Simpleui', 'CMDB', '权限认证', '动态菜单测试'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
     'dynamic': True,    # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时动态展示菜单内容
     'menus': [ {
         'app': 'auth',
@@ -153,32 +153,58 @@ SIMPLEUI_CONFIG = {
         ]
     },
     {
-    'app':'cmdb',
-    'name':'数据中心',
-    'icon': 'fas fa-building',
-    'models': [
-        {
-            'name': '机房',
-            'icon': 'fas fa-server',
-            'url': 'cmdb/idc/'
-        },
-        {
-            'name': '机柜',
-            'icon': 'fas fa-layer-group',
-            'url': 'cmdb/rack/'
-        },
-        {
-            'name': '服务器',
-            'icon': 'fab fa-linux',
-            'url': 'cmdb/server/'
-        },
-        {
-            'name': 'SSH用户',
-            'icon': 'fa fa-terminal',
-            'url': 'cmdb/sshuser/'
-        },
-    ]
-    }
+        'app':'cmdb',
+        'name':'CMDB',
+        'icon': 'fas fa-building',
+        'models': [
+              {
+            'app':'cmdb',
+            'name':'数据中心',
+            'icon': 'fas fa-building',
+            'models': [
+                {
+                    'name': '机房',
+                    'icon': 'fas fa-server',
+                    'url': 'cmdb/idc/'
+                },
+                {
+                    'name': '机柜',
+                    'icon': 'fas fa-layer-group',
+                    'url': 'cmdb/rack/'
+                },
+                {
+                    'name': '服务器',
+                    'icon': 'fab fa-linux',
+                    'url': 'cmdb/server/'
+                },
+                {
+                    'name': 'SSH用户',
+                    'icon': 'fa fa-terminal',
+                    'url': 'cmdb/sshuser/'
+                }
+            ]
+    },
+            {
+            'app':'business',
+            'name': '业务信息',
+            'icon': 'fa fa-globe',
+            'models': [
+            {
+                'name': '业务线',
+                'icon': 'fas fa-diagram-project',
+                'url': 'cmdb/businessline/'
+            },
+            {
+                'name': '项目',
+                'icon': 'fas fa-cube',
+                'url': 'cmdb/project/'
+            }
+            
+            ]
+            }
+            ]
+        }
+    ,
 ]
 }
 

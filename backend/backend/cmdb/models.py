@@ -82,3 +82,35 @@ class Server(BaseModel):
         ordering = ['-id']
     def __str__(self):
         return self.name
+
+
+
+class BusinessLine(BaseModel):
+    users = models.ManyToManyField(User, default='', null=True, blank=True, verbose_name='相关用户')
+
+    class Meta:
+        ordering = ['-id']
+        unique_together = ['name']
+
+class Project(BaseModel):
+    STATUS = (
+        ('0', '启用'),
+        ('1', '停用'),
+    )
+    LANGUAGE = (
+        ('python', 'python'),
+        ('java', 'java'),
+        ('php', 'php'),
+        ('golang', 'golang')
+    )
+    businesses = models.ManyToManyField(BusinessLine, default='', null=True, blank=True, verbose_name='所属业务线')
+    users = models.ManyToManyField(User, default='', null=True, blank=True, verbose_name='相关用户')
+    servers = models.ManyToManyField(Server, default='', null=True, blank=True, verbose_name='相关服务器')
+    language_type = models.CharField(default='', max_length=256, choices=LANGUAGE, null=True, blank=True, verbose_name='语言类型')
+    repo_url = models.CharField(default='', max_length=256, null=True, blank=True, verbose_name='版本库地址')
+    jenkins_job = models.CharField(default='', max_length=128, null=True, blank=True, verbose_name='JENKINS JOB')
+    status = models.CharField(default='0', max_length=2, choices=STATUS, verbose_name='状态')
+
+    class Meta:
+        ordering = ['-id']
+        unique_together = ['name']
